@@ -11,6 +11,20 @@ def read_clean_lines(path: Path) -> list[str]:
     return [line for line in lines if line]
 
 
+def build_report(path: Path, lines: list[str]) -> str:
+    if not lines:
+        return f"File: {path}\nLines found: 0\n\nNo content found."
+
+    rendered_lines = "\n".join(f"{idx}. {line}" for idx, line in enumerate(lines, start=1))
+    return (
+        f"File: {path}\n"
+        f"Lines found: {len(lines)}\n"
+        f"\n"
+        f"Cleaned content:\n"
+        f"{rendered_lines}"
+    )
+
+
 def build_parser() -> ArgumentParser:
     parser = ArgumentParser(
         prog="file_reader",
@@ -38,12 +52,7 @@ def main() -> int:
     if args.limit is not None:
         lines = lines[: args.limit]
 
-    print(f"File: {path}")
-    print(f"Non-empty lines: {len(lines)}")
-    print("Cleaned content:")
-    for idx, line in enumerate(lines, start=1):
-        print(f"{idx}. {line}")
-
+    print(build_report(path, lines))
     return 0
 
 
