@@ -1,0 +1,9 @@
+new header
+{section:border=true}
+{column:width=30%}
+Text for this column goes here. This is  the smaller column with a width of only 30%.
+{column}
+{column:width=70%}
+Text for this column goes here. This is  the larger column with a width of 70%.
+{column}
+{section}
